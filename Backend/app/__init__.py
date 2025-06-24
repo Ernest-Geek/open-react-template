@@ -7,6 +7,7 @@ from flask_bcrypt import Bcrypt
 from .config import Config
 from flask_cors import CORS
 from flask_migrate import Migrate
+from .chat import chat as chat_blueprint
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -18,6 +19,7 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.register_blueprint(chat_blueprint)
 
     db.init_app(app)
     bcrypt.init_app(app)

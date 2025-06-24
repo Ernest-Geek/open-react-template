@@ -1,14 +1,34 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_login import LoginManager
 from AgentService import CarAssistantServiceWithMemory
+from auth import auth  # ✅ import the auth blueprint
+from models import User  # ✅ import your User model
+from config import Config  # ✅ use your existing Config class
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import login_required
 
+
+
+# Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend integration
+app.config.from_object(Config)  # ✅ load your configs (SECRET_KEY, DB_URI, etc.)
+CORS(app) # Enable CORS for frontend integration
+
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'auth.login'
+
+# Register auth blueprint
+app.register_blueprint(auth, url_prefix="/auth")
 
 # Initialize the car service
 car_service = CarAssistantServiceWithMemory()
 
 @app.route('/api/chat', methods=['POST'])
+@login_required
 def chat():
     """
     Handle chat messages from the user
