@@ -11,3 +11,11 @@ MarkupSafe==3.0.2
 SQLAlchemy==2.0.41
 typing_extensions==4.14.0
 Werkzeug==3.1.3
+pandas
+numpy
+openai
+fuzzywuzzy
+python-levenshtein
+python-dotenv
+flask 
+flask-cors

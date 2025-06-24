@@ -4,5 +4,5 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'supersecretkey'  # Replace in production
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///users.db'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:Cable%40123@localhost/auto_centrale'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
