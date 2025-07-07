@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // ← Next.js router
+import { useRouter } from 'next/navigation'; 
 import Link from 'next/link';
 
 export default function SignIn() {
@@ -9,7 +9,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -17,7 +17,7 @@ export default function SignIn() {
     try {
       const response = await fetch('http://127.0.0.1:5000/auth/login', {
         method: 'POST',
-        credentials: 'include', // Ensures cookies are sent
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -28,8 +28,8 @@ export default function SignIn() {
       console.log(response.status, data);  // Debug log
       
       if (response.ok) {
-        // After successful login, check if the user is logged in
-        router.push('/chatbot'); // Redirect to the chatbot page
+        // Redirect to the Hero page after successful login
+        router.push('/hero'); 
       } else {
         setError(data.error || 'Login failed.');
       }
@@ -93,12 +93,6 @@ export default function SignIn() {
               <button className="btn w-full bg-linear-to-t from-indigo-600 to-indigo-500 text-white">
                 Sign in
               </button>
-              <div className="flex items-center gap-3 text-center text-sm italic text-gray-600 before:h-px before:flex-1 before:bg-linear-to-r before:from-transparent before:via-gray-400/25 after:h-px after:flex-1 after:bg-linear-to-r after:from-transparent after:via-gray-400/25">
-                or
-              </div>
-              <button className="btn relative w-full bg-gray-800 text-gray-300">
-                Sign In with Google
-              </button>
             </div>
           </form>
 
@@ -113,3 +107,4 @@ export default function SignIn() {
     </section>
   );
 }
+

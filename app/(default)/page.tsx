@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 import PageIllustration from "@/components/page-illustration";
-import Hero from "@/components/hero-home";
+// import Hero from "@/app/hero/hero-home";
 import Workflows from "@/components/workflows";
 import Features from "@/components/features";
 import Testimonials from "@/components/testimonials";
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <PageIllustration />
-      <Hero />
+      {/* <Hero /> */}
       <Workflows />
       <Features />
       <Testimonials />
