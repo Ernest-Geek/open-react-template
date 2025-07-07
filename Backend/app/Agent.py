@@ -8,8 +8,8 @@ from fuzzywuzzy import fuzz
 import json
 import logging
 from datetime import datetime
-from config import Config
-from MemoryUpdate import ConversationMemory
+from .config import Config
+from .MemoryUpdate import ConversationMemory
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

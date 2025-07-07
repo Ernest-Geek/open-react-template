@@ -58,13 +58,13 @@ def login():
     return jsonify({'error': 'Invalid credentials'}), 401
 
 
-@auth.route('/logout')
-@login_required
+@auth.route('/logout', methods=['POST'])
+# @login_required
 def logout():
     logout_user()
     return jsonify({'message': 'Logged out'}), 200
 
 @auth.route('/me')
-@login_required
+# @login_required
 def profile():
     return jsonify({'username': current_user.username})

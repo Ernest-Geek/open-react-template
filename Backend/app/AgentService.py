@@ -1,5 +1,5 @@
 from .Agent import CarAssistant
-from MemoryUpdate import ConversationMemory
+from .MemoryUpdate import ConversationMemory
 from .config import Config
 from typing import Dict, List, Tuple, Optional
 import json

@@ -2,6 +2,7 @@
 
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 # Load environment variables from a `.env` file (if present)
 load_dotenv()
@@ -9,11 +10,16 @@ load_dotenv()
 class Config:
     """Unified Configuration for Flask App, Database, and Car Assistant"""
 
+    SESSION_COOKIE_SECURE = True  # Ensures cookies are sent over HTTPS only (make sure you're using HTTPS in production)
+    PERMANENT_SESSION_LIFETIME = timedelta(hours=1)  # Session expiration after 1 hour of inactivity
+    REMEMBER_COOKIE_DURATION = timedelta(days=7)  # Duration of "Remember Me" sessions (if you want to implement this)
+    SESSION_PROTECTION = 'strong'  # Protect against session hijacking (ensure this is set)
+
     # --- Flask & Database Settings ---
-    SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey")  # Replace in production
+    SECRET_KEY = os.getenv("SECRET_KEY", "secret_key")  # Replace in production
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URI",
-        "mysql+pymysql://root:Cable@123@localhost/auto_centrale"
+        'mysql+pymysql://root:Cable%40123@localhost/auto_centrale'
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
