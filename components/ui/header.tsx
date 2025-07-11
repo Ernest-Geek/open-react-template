@@ -1,9 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Logo from "./logo";
 
 export default function Header() {
+  const [isClient, setIsClient] = useState(false);
+  const [routerPath, setRouterPath] = useState<string | null>(null);
+
+  // Use useEffect to set a flag to indicate client-side rendering and capture router path
+  useEffect(() => {
+    setIsClient(true);
+    setRouterPath(window.location.pathname); // Capture the current path on the client side
+  }, []);
+
+  // Don't render anything if we're on the /forecast page
+  if (isClient && routerPath === "/forecast") {
+    return null;
+  }
+
   return (
     <header className="z-30 mt-2 w-full md:mt-5">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -37,3 +53,4 @@ export default function Header() {
     </header>
   );
 }
+

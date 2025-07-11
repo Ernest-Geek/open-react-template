@@ -8,6 +8,9 @@ from .config import Config
 from flask_cors import CORS
 from flask_migrate import Migrate
 from .chat import chat as chat_blueprint
+from .charts import charts_bp
+from .forecast import forecast_bp
+from .images import images_bp
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -19,6 +22,11 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Blueprint registration
+    app.register_blueprint(charts_bp, url_prefix='/charts')
+    app.register_blueprint(forecast_bp, url_prefix='/forecast')
+    app.register_blueprint(images_bp, url_prefix='/images')
     app.register_blueprint(chat_blueprint)
 
     db.init_app(app)
